@@ -1,0 +1,69 @@
+package com.example.superfast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+public class Inicio extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_inicio);
+        CardView ComidaCard = findViewById(R.id.ComidaCard);
+        ComidaCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Inicio.this, MenuComidas.class);
+                startActivity(intent);
+            }
+        });
+
+        CardView bebidasCard = findViewById(R.id.BebidasCard);
+        bebidasCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Inicio.this, MenuBebidas.class);
+                startActivity(intent);
+            }
+        });
+
+        CardView aperitivosCard = findViewById(R.id.MeriendasCard);
+        aperitivosCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Inicio.this, MenuAperitivos.class);
+                startActivity(intent);
+            }
+        });
+
+        CardView postresCard = findViewById(R.id.CardPostres);
+        postresCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Inicio.this, MenuPostres.class);
+                startActivity(intent);
+            }
+        });
+
+        CardView perfilCard = findViewById(R.id.dirigir_perfil);
+        perfilCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Inicio.this, Perfil.class);
+                startActivity(intent);
+            }
+        });
+
+        CardView envioCard = findViewById(R.id.envioCard);
+        envioCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Inicio.this, MiPedido.class);
+                startActivity(intent);
+            }
+        });
+    }
+}
