@@ -1,0 +1,88 @@
+package com.example.superfast.domain;
+
+import java.io.Serializable;
+
+public class FoodDomain implements Serializable {
+    private String title;
+    private String descripcion;
+    private String picUrl;
+    private double precio;
+    private int tiempo;
+    private int local;
+    private String puntuacion;
+    private int numberinPedido;
+
+    public FoodDomain(String title, String descripcion, String picUrl, double precio, int tiempo, int local, String puntuacion) {
+        this.title = title;
+        this.description = description;
+        this.picUrl = picUrl;
+        this.price = precio;
+        this.time = tiempo;
+        this.energy = local;
+        this.score = puntuacion;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public int getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(int tiempo) {
+        this.tiempo = tiempo;
+    }
+
+    public int getLocal() {
+        return local;
+    }
+
+    public void setLocal(int local) {
+        this.local = local;
+    }
+
+    public String getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(String puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    public int getNumberinPedido() {
+        return numberinPedido;
+    }
+
+    public void setNumberinPedido(int numberinPedido) {
+        this.numberinPedido = numberinPedido;
+    }
+}
