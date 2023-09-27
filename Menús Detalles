@@ -1,0 +1,84 @@
+package com.example.superfast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.example.project1301.Domain.FoodDomain;
+import com.example.project1301.Helper.ManagmentCart;
+import com.example.project1301.R;
+
+public class DetailActivity extends AppCompatActivity {
+    private Button addToCartBtn;
+    private TextView plusBtn, minusBtn, titleTxt, tarifaTxt, descripcionTxt, numeroOrdenTxt, puntuacionTxt, localTxt, tiempoTxt;
+    private ImageView fotoComida;
+    private FoodDomain object;
+    private int numberOrder = 1;
+    private ManagmentCart managmentCart;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detalles);
+
+        managmentCart = new ManagmentCart(DetallesActivity.this);
+
+        initView();
+        getBundle();
+    }
+
+    private void getBundle() {
+        object = (FoodDomain) getIntent().getSerializableExtra("object");
+
+        int drawableResourceId = this.getResources().getIdentifier(object.getPicUrl(), "drawable", this.getPackageName());
+        Glide.with(this)
+                .load(drawableResourceId)
+                .into(fotoComida);
+
+        titleTxt.setText(object.getTitle());
+        tarifaTxt.setText("C$" + object.getPrecio());
+        descripcionTxt.setText(object.getDescripcion());
+        numeroOrdenTxt.setText("" + numberOrder);
+        localTxt.setText(object.getLocal() + " punt.");
+        puntuacionTxt.setText(object.getPuntuacion() + "");
+        tiempoTxt.setText(object.getTiempo() + " min");
+        addToCartBtn.setText("Añadir al carrito - C$" + Math.round(numeroOrden * object.getPrecio()));
+
+        plusBtn.setOnClickListener(v -> {
+            numeroOrden = numeroOrden + 1;
+            numeroOrdenTxt.setText("" + numeroOrden);
+            addToCartBtn.setText("Añadir al carrito - C$" + Math.round(numberOrder * object.getPrecio()));
+        });
+
+        minusBtn.setOnClickListener(v -> {
+            numeroOrden = numeroOrden - 1;
+            numeroOrdenTxt.setText("" + numeroOrden);
+            addToCartBtn.setText("Añadir al carrito - C$" + Math.round(numeroOrden * object.getPrecio()));
+        });
+
+        addToCartBtn.setOnClickListener(v -> {
+            object.setNumberinCart(numeroOrden);
+            managmentCart.insertFood(object);
+        });
+    }
+
+    private void initView() {
+        addToCartBtn = findViewById(R.id.addToCartBtn);
+        tiempoTxt = findViewById(R.id.tiempoTxt);
+        tarifaTxt = findViewById(R.id.precioTxt);
+        titleTxt=findViewById(R.id.titleTxt);
+        descripcionTxt = findViewById(R.id.descripcionTxt);
+        numeroOrdenTxt = findViewById(R.id.numberItemTxt);
+        plusBtn = findViewById(R.id.plusCardBtn);
+        minusBtn = findViewById(R.id.MinusCartBtn);
+        fotoComida = findViewById(R.id.foodPic);
+        puntuacionTxt = findViewById(R.id.PuntuacionTxt);
+        localTxt = findViewById(R.id.localTxt);
+
+    }
+}
