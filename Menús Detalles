@@ -13,7 +13,7 @@ import com.example.project1301.Domain.FoodDomain;
 import com.example.project1301.Helper.ManagmentCart;
 import com.example.project1301.R;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetallesActivity extends AppCompatActivity {
     private Button addToCartBtn;
     private TextView plusBtn, minusBtn, titleTxt, tarifaTxt, descripcionTxt, numeroOrdenTxt, puntuacionTxt, localTxt, tiempoTxt;
     private ImageView fotoComida;
