@@ -1,0 +1,181 @@
+package com.example.project1301.Activity;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.LinearLayout;
+
+import com.example.project1301.Adapter.AlmuerzosListAdapter;
+import com.example.project1301.Adapter.CenasListAdapter;
+import com.example.project1301.Adapter.DesayunosListAdapter;
+import com.example.project1301.Adapter.FoodListAdapter;
+import com.example.project1301.Adapter.MeriendasListAdapter;
+import com.example.project1301.Domain.FoodDomain;
+import com.example.project1301.R;
+
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
+    private RecyclerView.Adapter adapterFoodList;
+    private RecyclerView recyclerViewFood;
+
+    private RecyclerView recyclerViewDesayunos;
+    private RecyclerView.Adapter adapterDesayunos;
+
+
+    private RecyclerView.Adapter adapterAlmuerzos;
+
+    private RecyclerView recyclerViewAlmuerzos;
+
+
+    private RecyclerView.Adapter adapterCenas;
+
+    private RecyclerView recyclerViewCenas;
+
+
+    private RecyclerView.Adapter adapterMeriendas;
+
+    private RecyclerView recyclerViewMeriendas;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        initRecyclerview();
+        bottomNavigation();
+    }
+
+    private void bottomNavigation() {
+        LinearLayout homeBtn = findViewById(R.id.homeBtn);
+        LinearLayout cartBtn = findViewById(R.id.cartBtn);
+
+        homeBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+
+        cartBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
+    }
+
+    private void initRecyclerview() {
+        ArrayList<FoodDomain> items = new ArrayList<>();
+        items.add(new FoodDomain("Chilaquiles","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!\n\n"
+                +" Preparados con tortillas de maíz crujientes bañadas en una salsa picante y deliciosa, los chilaquiles son una verdadera fiesta para tus sentidos. ","chilaquilesjalisco2",280,20,5,"Jalisco"));
+        items.add(new FoodDomain("Alitas de pollo","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","alitaspicantesia",155,20,4,"Jalisco"));
+        items.add(new FoodDomain("Tacos arrechera","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","tacosarrechera",150,3,2,"Jalisco"));
+        items.add(new FoodDomain("Burrito de res","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","burrito",160,20,1,"Jalisco"));
+        items.add(new FoodDomain("Chile relleno","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","chilerelleno",170,20,10,"Jalisco"));
+        items.add(new FoodDomain("Arrechera","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","arrachera",220,25,9,"Jalisco"));
+        items.add(new FoodDomain("Hamburguesa","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","hamburguesa",210,20,8,"Jalisco"));
+        items.add(new FoodDomain("Surtido","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","surtido",310,25,7,"Jalisco"));
+        items.add(new FoodDomain("Churrasco","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","churrasco",390,25,6,"Jalisco"));
+        items.add(new FoodDomain("Ceviche curvina","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","cevichecurvina",210,20,5,"Jalisco"));
+        items.add(new FoodDomain("Fajitas de pollo","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","fajitasdepollo",310,25,4,"Jalisco"));
+        items.add(new FoodDomain("Carnitas taco","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","carnitadetaco",190,20,3,"Jalisco"));
+        items.add(new FoodDomain("Tomahawk Steak","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","tomahawksteak",430,30,2,"Jalisco"));
+        items.add(new FoodDomain("Tostones","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","tostones",150,15,1,"Jalisco"));
+
+        recyclerViewFood = findViewById(R.id.view1);
+        recyclerViewFood.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        adapterFoodList = new FoodListAdapter(items);
+        recyclerViewFood.setAdapter(adapterFoodList);
+
+        // Ahora, crea una lista de elementos para el RecyclerView de "Desayunos"
+        ArrayList<FoodDomain> desayunosItems = new ArrayList<>();
+        desayunosItems.add(new FoodDomain("Nica", "Huevos-gallopinto\n\n"+"plátano-queso-crema", "nica", 100, 10, 2, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Panqueques", "3 panqueques-fruta-miel", "pancakes", 100, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Salud", "Granola-yogurt\n\n"+"frutas-chia", "salud", 120, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Inglés", "Huevo-tocino-salchicha\n\n"+"frijoles blanco", "ingles", 150, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Johanna", "Aguacate-quesocrema", "johanna", 100, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Walter", "Jamón-aderezo mostaza con miel", "walter", 120, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Michelle", "Pollo-mango", "michelle", 120, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Freddy", "Queso brie-miel-nueces", "freddy", 120, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Ensalada Cesar", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la pueta de tu casa!", "ensaladacesar", 160, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Omelette verduras", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la pueta de tu casa!", "omeletteverduras", 160, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Hamburguesa de la casa", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la pueta de tu casa!", "hamburguesadelacasa", 160, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Waffles", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la pueta de tu casa!", "waffels", 160, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Panini nica", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la pueta de tu casa!", "panininican", 160, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Raisin waffle", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la pueta de tu casa!", "raisinwaffle", 160, 20, 8, "Mañana Mañana Café"));
+        desayunosItems.add(new FoodDomain("Peperoni panini", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la pueta de tu casa!", "peperonipanini", 160, 20, 8, "Mañana Mañana Café"));
+
+        recyclerViewDesayunos = findViewById(R.id.recyclerViewDesayunos); // Asegúrate de que view2 sea el ID del RecyclerView en tu diseño XML
+        recyclerViewDesayunos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        adapterDesayunos = new DesayunosListAdapter(desayunosItems); // Crea el adaptador de DesayunosListAdapter
+        recyclerViewDesayunos.setAdapter(adapterDesayunos);
+
+        // Ahora, crea una lista de elementos para el RecyclerView de "Almuerzos"
+        ArrayList<FoodDomain> AlmuerzosItems = new ArrayList<>();
+        AlmuerzosItems.add(new FoodDomain("Ceviche curvina","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","cevichecurvina",210,20,5,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Chilaquiles","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!\n\n"
+                +" Preparados con tortillas de maíz crujientes bañadas en una salsa picante y deliciosa, los chilaquiles son una verdadera fiesta para tus sentidos. ","chilaquilesjalisco2",280,20,5,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Chile relleno","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","chilerelleno",170,20,10,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Burrito de res","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","burrito",160,20,1,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Fajitas de pollo","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","fajitasdepollo",310,25,4,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Tacos arrechera","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","tacosarrechera",150,3,2,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Hamburguesa","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","hamburguesa",210,20,8,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Carnitas taco","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","carnitadetaco",190,20,3,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Surtido","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","surtido",310,25,7,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Churrasco","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","churrasco",220,25,9,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Arrechera","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","arrachera",220,25,9,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Tomahawk Steak","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","tomahawksteak",430,30,2,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Tostones","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","tostones",150,15,1,"Jalisco"));
+        AlmuerzosItems.add(new FoodDomain("Alitas de pollo","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","alitaspicantesia",155,20,4,"Jalisco"));
+
+
+        recyclerViewAlmuerzos = findViewById(R.id.recyclerViewAlmuerzos); // Asegúrate de que view2 sea el ID del RecyclerView en tu diseño XML
+        recyclerViewAlmuerzos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        adapterAlmuerzos = new AlmuerzosListAdapter(AlmuerzosItems); // Crea el adaptador de DesayunosListAdapter
+        recyclerViewAlmuerzos.setAdapter(adapterAlmuerzos);
+
+        // Ahora, crea una lista de elementos para el RecyclerView de "Cenas"
+        ArrayList<FoodDomain> CenasItems = new ArrayList<>();
+        CenasItems.add(new FoodDomain("Tacos arrechera","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","tacosarrechera",150,3,2,"Jalisco"));
+        CenasItems.add(new FoodDomain("Hamburguesa","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","hamburguesa",210,20,8,"Jalisco"));
+        CenasItems.add(new FoodDomain("Carnitas taco","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","carnitadetaco",190,20,3,"Jalisco"));
+        CenasItems.add(new FoodDomain("Tostones","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","tostones",150,15,1,"Jalisco"));
+        CenasItems.add(new FoodDomain("Surtido","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","surtido",310,25,7,"Jalisco"));
+        CenasItems.add(new FoodDomain("Chilaquiles","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!\n\n"
+                +" Preparados con tortillas de maíz crujientes bañadas en una salsa picante y deliciosa, los chilaquiles son una verdadera fiesta para tus sentidos. ","chilaquilesjalisco2",280,20,5,"Jalisco"));
+        CenasItems.add(new FoodDomain("Churrasco","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","churrasco",220,25,9,"Jalisco"));
+        CenasItems.add(new FoodDomain("Ceviche curvina","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","cevichecurvina",210,20,5,"Jalisco"));
+        CenasItems.add(new FoodDomain("Chile relleno","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","chilerelleno",170,20,10,"Jalisco"));
+        CenasItems.add(new FoodDomain("Arrechera","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","arrachera",220,25,9,"Jalisco"));
+        CenasItems.add(new FoodDomain("Alitas de pollo","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","alitaspicantesia",155,20,4,"Jalisco"));
+        CenasItems.add(new FoodDomain("Fajitas de pollo","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","fajitasdepollo",310,25,4,"Jalisco"));
+        CenasItems.add(new FoodDomain("Tomahawk Steak","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","tomahawksteak",430,30,2,"Jalisco"));
+        CenasItems.add(new FoodDomain("Burrito de res","¡Descubre la explosión de sabores y la autenticidad de México en cada bocado con nuestros irresistibles chilaquiles!","burrito",160,20,1,"Jalisco"));
+
+        recyclerViewCenas = findViewById(R.id.recyclerViewCenas); // Asegúrate de que view2 sea el ID del RecyclerView en tu diseño XML
+        recyclerViewCenas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        adapterCenas = new CenasListAdapter(CenasItems); // Crea el adaptador de DesayunosListAdapter
+        recyclerViewCenas.setAdapter(adapterCenas);
+
+        // Ahora, crea una lista de elementos para el RecyclerView de "Meriendas"
+        ArrayList<FoodDomain> MeriendasItems = new ArrayList<>();
+        MeriendasItems.add(new FoodDomain("Panini nica", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la pueta de tu casa!", "panininican", 160, 20, 8, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Michelle", "Pollo-mango", "michelle", 120, 20, 8, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Nica", "Huevos-gallopinto\n\n"+"plátano-queso-crema", "nica", 100, 10, 2, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Raisin waffle", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la pueta de tu casa!", "raisinwaffle", 160, 20, 8, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Omelette verduras", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la puerta de tu casa!", "omeletteverduras", 160, 20, 8, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Walter", "Jamón-aderezo mostaza con miel", "walter", 120, 20, 8, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Ensalada Cesar", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la puerta de tu casa!", "ensaladacesar", 160, 20, 8, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Hamburguesa de la casa", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la puerta de tu casa!", "hamburguesadelacasa", 160, 20, 8, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Waffles", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la puerta de tu casa!", "waffels", 160, 20, 8, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Inglés", "Huevo-tocino-salchicha\n\n"+"frijoles blanco", "ingles", 150, 20, 8, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Salud", "Granola-yogurt\n\n"+"frutas-chia", "salud", 120, 20, 8, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Peperoni panini", "¡Huevos fritos de la mera gallina somos Mañana mañana y ya nos conoces, ahora hasta la puerta de tu casa!", "peperonipanini", 160, 20, 8, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Johanna", "Aguacate-quesocrema", "johanna", 100, 20, 8, "Mañana Mañana Café"));
+        MeriendasItems.add(new FoodDomain("Panqueques", "3 panqueques-fruta-miel", "pancakes", 100, 20, 8, "Mañana Mañana Café"));
+
+        recyclerViewMeriendas = findViewById(R.id.recyclerViewMeriendas); // Asegúrate de que view2 sea el ID del RecyclerView en tu diseño XML
+        recyclerViewMeriendas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        adapterMeriendas = new MeriendasListAdapter(MeriendasItems); // Crea el adaptador de DesayunosListAdapter
+        recyclerViewMeriendas.setAdapter(adapterMeriendas);
+    }
+}
